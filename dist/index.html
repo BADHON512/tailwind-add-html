@@ -13,7 +13,7 @@
   <div class=" login h-screen w-full flex justify-center mt-10">
     <div class="bg-orange-400 rounded-md h-[70vh] w-[50vw]">
 
-      <form  class="p-5" action="">
+      <form class="p-5" action="">
         <div class="mt-3">
           <label for="" class="block mb-2">Name</label>
           <input required type="text" class="w-full p-2 rounded-md outline-none border border-blue-600"
@@ -59,22 +59,22 @@
     const hide = document.querySelector('.hide')
     const input = document.querySelector('input[type="password"]')
     show.addEventListener('click', (e) => {
-      
 
-      if (input.type==='password') {
+
+      if (input.type === 'password') {
         show.style.display = 'none'
-        hide.style.display='block'
-        input.type='text'
-   
+        hide.style.display = 'block'
+        input.type = 'text'
+
       }
     })
 
     hide.addEventListener('click', (e) => {
-      if (input.type==='text') {
+      if (input.type === 'text') {
         show.style.display = 'block'
-        hide.style.display='none'
-        input.type='password'
-        
+        hide.style.display = 'none'
+        input.type = 'password'
+
       }
     })
 
@@ -88,64 +88,139 @@
       const name = document.querySelector('input[type="text"]').value;
       const email = document.querySelector('input[type="email"]').value;
       const password = document.querySelector('input[type="password"]').value;
-      const user={name,email,password}
-      localStorage.setItem('user',JSON.stringify(user))
-      login.style.display='none'
-      const h1=document.createElement('h1')
+      const user = { name, email, password }
+      localStorage.setItem('user', JSON.stringify(user))
+      login.style.display = 'none'
+      const h1 = document.createElement('h1')
       console.log(h1)
-      h1.innerText='your are login now '
-    
+      h1.innerText = 'your are login now '
+
       login2.append(h1)
-      
+
     })
 
     console.log(document)
 
-  function changecolorfun (){
-    const hex= "0123456789abcdef"
-    let color= "#"
-   
+    function changecolorfun() {
+      const hex = "0123456789abcdef"
+      let color = "#"
 
-    for (let i = 0; i < 6; i++) {
-      color += `${hex[Math.floor(Math.random()*16)]}`
-     
-      
+
+      for (let i = 0; i < 6; i++) {
+        color += `${hex[Math.floor(Math.random() * 16)]}`
+
+
+      }
+
+      return color
+
     }
 
-    return color
+    const start = document.querySelector('.start')
+    const badhon = document.querySelector('.badhon')
+    let setInterva = null
+    start.addEventListener('click', () => {
+      if (!setInterva) {
+        setInterva = setInterval(() => {
+
+          const color = changecolorfun()
+
+          badhon.style.backgroundColor = color
+        }, 1000)
+      }
+    })
+
+    const stoper = document.querySelector('.stop')
+    stoper.addEventListener('click', () => {
+      console.log('click')
+      if (setInterva !== null) {
+        clearInterval(setInterva);
+        setInterva = null;
+      }
+    })
+
+
+    const ull = document.querySelector('.ul')
+//     const time = new Date().get
+//     console.log(time)
+
+  
+
+   
+    
+//    setInterval(() => {
+//     let date = new Date()
+//    const time= `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+   
+//     ull.innerHTML=time
+//    }, 1000);
+   
+//    function updateTime() {
+//   const currentDate = new Date();
+//   let hours = currentDate.getHours();
+//   const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+//   const seconds = currentDate.getSeconds().toString().padStart(2, '0');
+//   let ampm = 'AM';
+
+//   // Convert hours to 12-hour format and determine AM/PM
+//   if (hours >= 12) {
+//     ampm = 'PM';
+//     if (hours > 12) {
+//       hours -= 12;
+//     }
+//   }
+
+//   hours = hours.toString().padStart(2, '0');
+//   const time = `${hours}:${minutes}:${seconds} ${ampm}`;
+
+//   console.log(time);
+//   // Append the time to an element (assuming 'ull' is an HTML element)
+//   ull.textContent = time;
+// }
+
+// // Initial call to display the time immediately
+// updateTime();
+
+// // Set up a continuous interval to update the time every second
+// setInterval(updateTime, 1000);
+
+    
+
+  function updateTime(){
+    const currentDate= new Date()
+   let hours=currentDate.getHours()
+    const minutes=currentDate.getMinutes()
+    const seconds=currentDate.getSeconds()
+    const miliseconds=currentDate.getMilliseconds()
+    let ampm='AM'
+    if(hours>=12){
+      ampm="PM"
+    }
+    if(hours>12){
+      hours-=12
+    }
+
+    const time=`${hours}:${minutes}:${seconds}:${miliseconds}${" "}${ampm}`
+    ull.textContent=time
 
   }
 
-  const start = document.querySelector('.start')
-  const badhon= document.querySelector('.badhon')
-    let setInterva =null
-  start.addEventListener('click',()=>{
-     if(!setInterva){
-      setInterva= setInterval(()=>{
+  setInterval(updateTime,100)
 
-     const color =changecolorfun()
-     
-      badhon.style.backgroundColor=color
-    }, 1000)
-     }
+  window.onload=((e)=>{
+    navigator.geolocation.getCurrentPosition((x,p)=>{
+      console.log(x)
+    })
+    console.log(e)
   })
 
-  const stoper = document.querySelector('.stop')
-  stoper.addEventListener('click',()=>{
-    console.log('click')
-    if (setInterva !== null) {
-    clearInterval(setInterva);
-    setInterva = null;
-  }
-  })
+//   window.onload = (e) => {
+//   navigator.geolocation.getCurrentPosition((x, p) => {
+//     console.log(x);
+//   });
+//   console.log(e);
+// };
 
-
-  const ull=document.querySelector('.ul')
-  
-
-  console.dir(ull)
-
-  
 
   </script>
 
